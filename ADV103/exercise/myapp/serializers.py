@@ -12,6 +12,18 @@ class CategorySerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class ArticleSerializer(serializers.ModelSerializer):
+    category = serializers.SlugRelatedField(
+        slug_field='name',
+        queryset=Category.objects.all(),
+        allow_null=True,
+        required=False
+    )
+    tags = serializers.SlugRelatedField(
+        many=True,
+        slug_field='name',
+        queryset=Tag.objects.all()
+    )
+
     class Meta:
         model = Article
-        fields = '__all__'
+        fields = ('id', 'title', 'content', 'category', 'tags')
