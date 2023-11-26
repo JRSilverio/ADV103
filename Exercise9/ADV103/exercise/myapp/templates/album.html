@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="d-flex justify-content-between border-top pt-3">
+    <h1>Album List</h1>
+    <div>
+      <a href="#" class="btn btn-primary btn-block btn-md" style="height: 50px; width: 190px; font-size: 19px;">Create New Article</a>
+    </div>
+  </div>
+  <ul>
+    {% for albums in album %}
+      <li class="mt-3">
+        <div class="d-flex justify-content-between border-top pt-3">
+          <strong><span style="font-size: 24px;">{{ albums.title }}</span></strong>
+          <div class="d-flex">
+            <button type="button" class="btn btn-success btn-sm mr-2" style="width: 58px">View</button>
+            <button type="button" class="btn btn-warning btn-sm mr-2" style="width: 58px">Update</button>
+            <button type="button" class="btn btn-danger btn-sm" style="width: 58px">Delete</button>
+          </div>
+        </div>
+        <strong>Category:</strong> {{ albums.category }}<br>
+        <strong>Tags:</strong> {% for tag in albums.tags %}{{ tag }}{% if not forloop.last %}, {% endif %}{% endfor %}<br>
+        <strong>Content:</strong> {{ albums.content }}<br>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}
